@@ -4,11 +4,11 @@
  * @authod arodic / http://aleksandarrodic.com/
  */
 
-THREE.StereoEffect = function ( renderer ) {
+THREE.StereoEffect = function ( renderer, separation ) {
 
 	// API
 
-	this.separation = 3;
+	this.separation = separation;
 
 	// internals
 
@@ -39,7 +39,7 @@ THREE.StereoEffect = function ( renderer ) {
 		scene.updateMatrixWorld();
 
 		if ( camera.parent === undefined ) camera.updateMatrixWorld();
-	
+
 		camera.matrixWorld.decompose( _position, _quaternion, _scale );
 
 		// left
@@ -52,7 +52,7 @@ THREE.StereoEffect = function ( renderer ) {
 
 		_cameraL.position.copy( _position );
 		_cameraL.quaternion.copy( _quaternion );
-		_cameraL.translateX( - this.separation );
+		_cameraL.translateX( - 0.5 * this.separation );
 		_cameraL.updateMatrixWorld();
 
 		// right
@@ -63,7 +63,7 @@ THREE.StereoEffect = function ( renderer ) {
 
 		_cameraR.position.copy( _position );
 		_cameraR.quaternion.copy( _quaternion );
-		_cameraR.translateX( this.separation );
+		_cameraR.translateX( 0.5 * this.separation );
 		_cameraR.updateMatrixWorld();
 
 		//
