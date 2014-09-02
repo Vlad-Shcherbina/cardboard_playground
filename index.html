@@ -102,6 +102,18 @@
       mesh.rotation.x = -Math.PI / 2;
       scene.add(mesh);
 
+      for (var j = 0; j < 5; j++) {
+        for (var i = 0; i < 20; i++) {
+          var q = new THREE.Mesh(new THREE.SphereGeometry(5, 20, 20), material);
+          var a = 2 * Math.PI * (i + j % 2 * 0.5) / 20;
+          q.position.x = 5 * 6.3 * Math.cos(a) - 1;
+          q.position.z = 5 * 6.3 * Math.sin(a);
+          q.position.y = 5 + 8.5 * j;
+          if (i % 5 >= j)
+            scene.add(q);
+        }
+      }
+
       window.addEventListener('resize', resize, false);
       setTimeout(resize, 1);
     }
